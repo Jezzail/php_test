@@ -40,6 +40,7 @@
 		if (!$problems && isset($_FILES['media']['name']) && ($_FILES['media']['name'])!=''){
 			$uploads_dir = './media'; //destination folder
 	        $name = basename($_FILES["media"]["name"]);
+	        $name = preg_replace('/[^A-Za-z0-9 _ .-]/', '', $name);//cleaning the to make the life easier :)
 	        $date = date('YmdHis');//we will add the date to the filename to make it unique
 			$filename = $date."_".$name;
 	        $target_file = "$uploads_dir/$filename";
@@ -78,7 +79,7 @@
     	<div class='container'>
     		<div class='topbardiv'>POSTS: <span id='total_posts'></span></div>
     		<div class='topbardiv'>
-	    		<button class='btn-file-input' type="button"  data-jq-dropdown="#jq-dropdown-1">EXPORT</button>
+	    		<button class='button' type="button"  data-jq-dropdown="#jq-dropdown-1">EXPORT</button>
 	    		<div id="jq-dropdown-1" class="jq-dropdown jq-dropdown-tip">
 				    <ul class="jq-dropdown-menu">
 				        <li><a href="./export/csv.php">CSV</a></li>
@@ -94,8 +95,8 @@
 	    		<div class='titlecontainer'>
 	    			<input type="text" name="title" placeholder="Image title" class='titleinput'>
 	    		</div>
-	    		<div class="file-input-wrapper">
-				    <button class="btn-file-input">UPLOAD</button>
+	    		<div class="uploadcontainer">
+				    <button class="button">UPLOAD</button>
 				    <input name="media" id='media' type="file" class="upload" accept=".jpeg,.jpg,.png,.gif"/>
 				</div>
 				<div class='errors' id='errors'>
